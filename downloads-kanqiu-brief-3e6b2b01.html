@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>看球直播 · 持续关注，再次抵达</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #fafaf9;
+            color: #1d1d1f;
+            line-height: 1.7;
+            font-weight: 400;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page-wrapper {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem;
+            width: 100%;
+            flex: 1;
+        }
+
+        /* hero 模块 — 极简横幅 */
+        .hero {
+            margin-bottom: 3rem;
+            border-bottom: 1px solid #e6e6e6;
+            padding-bottom: 2rem;
+        }
+
+        .hero-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #8e8e93;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-title {
+            font-size: 2.4rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            color: #111;
+            margin-bottom: 0.4rem;
+        }
+
+        .hero-sub {
+            font-size: 1.1rem;
+            color: #515154;
+            font-weight: 350;
+            max-width: 32em;
+            margin-top: 0.25rem;
+        }
+
+        .hero-note {
+            font-size: 0.85rem;
+            color: #8e8e93;
+            margin-top: 0.8rem;
+            border-left: 2px solid #d4d4d6;
+            padding-left: 1rem;
+        }
+
+        /* 背景说明卡片（极简灰底） */
+        .bg-card {
+            background: #f3f3f2;
+            border-radius: 1rem;
+            padding: 1.8rem 2rem;
+            margin-bottom: 2.8rem;
+            border: 1px solid #eaeaea;
+        }
+
+        .bg-card h2 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.6rem;
+            color: #1a1a1c;
+        }
+
+        .bg-card p {
+            font-size: 0.98rem;
+            color: #3a3a3c;
+        }
+
+        /* 三段自然介绍 */
+        .intro-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-bottom: 3.2rem;
+        }
+
+        .intro-item {
+            border-bottom: 1px solid #ececeb;
+            padding-bottom: 1.6rem;
+        }
+
+        .intro-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .intro-item h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #222;
+            margin-bottom: 0.25rem;
+            letter-spacing: -0.01em;
+        }
+
+        .intro-item .meta {
+            font-size: 0.75rem;
+            color: #a0a0a5;
+            letter-spacing: 0.03em;
+            margin-bottom: 0.7rem;
+        }
+
+        .intro-item p {
+            font-size: 0.97rem;
+            color: #3b3b3e;
+        }
+
+        .intro-item a {
+            color: #1f5f8f;
+            text-decoration: none;
+            border-bottom: 1px solid #cddbe8;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .intro-item a:hover {
+            border-bottom-color: #1f5f8f;
+            color: #0c3b5c;
+        }
+
+        /* 特点 / 场景摘要 — 极简列表 */
+        .feature-note {
+            background: #ffffff;
+            border: 1px solid #e8e8e7;
+            border-radius: 1.2rem;
+            padding: 1.6rem 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .feature-note h4 {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #2c2c2e;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-note ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem 1.2rem;
+        }
+
+        .feature-note li {
+            font-size: 0.9rem;
+            color: #4a4a4d;
+            position: relative;
+            padding-left: 1.4rem;
+        }
+
+        .feature-note li::before {
+            content: "·";
+            position: absolute;
+            left: 0.2rem;
+            color: #b0b0b5;
+            font-weight: 700;
+        }
+
+        /* 页尾提示 — 收藏、再次访问 */
+        .footer-note {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #dededd;
+            font-size: 0.92rem;
+            color: #5a5a5e;
+        }
+
+        .footer-note strong {
+            font-weight: 500;
+            color: #222;
+        }
+
+        .footer-note a {
+            color: #1f5f8f;
+            text-decoration: none;
+            border-bottom: 1px solid #d2dde8;
+            transition: border-color 0.2s;
+        }
+
+        .footer-note a:hover {
+            border-bottom-color: #1f5f8f;
+        }
+
+        .footer-meta {
+            margin-top: 0.8rem;
+            font-size: 0.78rem;
+            color: #8e8e93;
+        }
+
+        /* 响应式 */
+        @media (max-width: 520px) {
+            .page-wrapper {
+                padding: 1.8rem 1.2rem;
+            }
+
+            .hero-title {
+                font-size: 1.8rem;
+            }
+
+            .hero-sub {
+                font-size: 1rem;
+            }
+
+            .bg-card {
+                padding: 1.3rem;
+            }
+
+            .feature-note {
+                padding: 1.2rem 1.3rem;
+            }
+
+            .feature-note ul {
+                flex-direction: column;
+                gap: 0.2rem;
+            }
+        }
+
+        @media (min-width: 800px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- hero 横幅 -->
+        <div class="hero">
+            <div class="hero-label">· 常访 · 收藏 · 持续关注</div>
+            <h1 class="hero-title">再次回到这里</h1>
+            <div class="hero-sub">竞技画面与日常陪伴，值得被反复打开。</div>
+            <div class="hero-note">无论你从哪个入口抵达，这扇门一直开着。</div>
+        </div>
+
+        <!-- 背景说明：简洁交代站点属性 -->
+        <div class="bg-card">
+            <h2>关于这个直播集合</h2>
+            <p>
+                聚合多个赛事的实时信号，覆盖足球、篮球、网球及更多项目。
+                没有复杂注册流程，打开即看——这是它最初的设计逻辑。
+                从桌面浏览器到移动端，界面保持克制，把注意力还给比赛本身。
+            </p>
+        </div>
+
+        <!-- 三段自然介绍：从再次访问、收藏、持续关注角度展开 -->
+        <div class="intro-grid">
+            <div class="intro-item">
+                <h3>为什么值得再次打开</h3>
+                <div class="meta">不是临时页面，而是常驻工具</div>
+                <p>
+                    直播链接的稳定性与更新速度，决定了你是否愿意把它留在书签栏。
+                    经过多次迭代，<a href="https://downloads-kanqiu.com">看球直播</a> 的信号源切换机制已经足够安静——
+                    你不需要在比赛中断时四处寻找替代链接，它替你完成了这部分工作。
+                    每一次重新访问，界面依然是那个熟悉的结构，没有多余弹窗或突然改版。
+                </p>
+            </div>
+
+            <div class="intro-item">
+                <h3>收藏，是因为值得信赖</h3>
+                <div class="meta">一个收藏夹里的固定锚点</div>
+                <p>
+                    很多人把直播网站加入书签，但真正频繁使用的并不多。
+                    收藏 <a href="https://downloads-kanqiu.com">看球直播</a> 的理由往往很具体：赛前五分钟还能顺利加载，
+                    深夜场次依然有清晰画面，比分与实时数据同步没有明显延迟。
+                    这些细小的可靠感累积起来，就成了不轻易删除书签的习惯。
+                </p>
+            </div>
+
+            <div class="intro-item">
+                <h3>持续关注，并非出于冲动</h3>
+                <div class="meta">长线使用的真实场景</div>
+                <p>
+                    联赛周期长，杯赛间歇短，持续关注一个直播源意味着信任它的运维节奏。
+                    没有突然收费的入口，也没有强制更新的提示。
+                    对于只看球、不折腾的用户来说，这种稳定就是最好的体验。
+                    你只需记住它的名字，剩下的交给时间。
+                </p>
+            </div>
+        </div>
+
+        <!-- 特点/场景摘要 — 像 FAQ 摘要，但更轻 -->
+        <div class="feature-note">
+            <h4>一些你可能关心的细节</h4>
+            <ul>
+                <li>无需注册，直接加载</li>
+                <li>多线路备用，减少中断</li>
+                <li>适配手机横竖屏</li>
+                <li>无弹窗干扰观赛</li>
+                <li>赛前10分钟即可进入</li>
+            </ul>
+        </div>
+
+        <!-- 页尾访问提示 -->
+        <div class="footer-note">
+            <p>如果你已经离开了一段时间，不妨把 <a href="https://downloads-kanqiu.com">看球直播</a> 重新放入书签栏。
+            <strong>收藏不是终点，再次访问才是。</strong> 下一次打开，它应该还在那里，安静地等着你选一场比赛。</p>
+            <div class="footer-meta">— 页面索引 · 无广告 · 无追踪 · 只有直播</div>
+        </div>
+    </div>
+</body>
+</html>
